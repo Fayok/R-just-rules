@@ -1,0 +1,797 @@
+---
+title: "Economist Graph CPI HDI"
+output: html_document
+date: "2024-04-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+> set.seed(123)
+> sample_countries <- EconomistData[sample(nrow(data), 30), ]
+Error in sample.int(length(x), size, replace, prob) : 
+  invalid first argument
+> sample_countries <- EconomistData[sample(nrow(EconomistData), 30), ]
+> 
+> highlighted_country <- "Nigeria"
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA), color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(EconomistData = sample_countries, size = 3, hjust = 0, vjust = 0) +
++     geom_point(EconomistData = subset(EconomistData, Country == highlight_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: [Transparency International; UN Human Development Report]") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Error in eval(e, x, parent.frame()) : 
+  object 'highlight_country' not found
+In addition: Warning message:
+In geom_text_repel(EconomistData = sample_countries, size = 3, hjust = 0,  :
+  Ignoring unknown parameters: `EconomistData`
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA), color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(EconomistData = sample_countries, size = 3, hjust = 0, vjust = 0) +
++     geom_point(EconomistData = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: [Transparency International; UN Human Development Report]") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: In geom_text_repel(EconomistData = sample_countries, size = 3, hjust = 0,  :
+  Ignoring unknown parameters: `EconomistData`
+2: In geom_point(EconomistData = subset(EconomistData, Country == highlighted_country),  :
+  Ignoring unknown parameters: `EconomistData`
+3: Removed 143 rows containing missing values or values outside the scale
+range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 13 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 13 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3) +
++     geom_point(EconomistData = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: [Transparency International; UN Human Development Report]") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning message:
+In geom_point(EconomistData = subset(EconomistData, Country == highlighted_country),  :
+  Ignoring unknown parameters: `EconomistData`
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(EconomistData = sample_countries, aes(label = Country), size = 3, hjust = 0, vjust = 0) +
++     geom_point(EconomistData = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: In geom_text_repel(EconomistData = sample_countries, aes(label = Country),  :
+  Ignoring unknown parameters: `EconomistData`
+2: In geom_point(EconomistData = subset(EconomistData, Country == highlighted_country),  :
+  Ignoring unknown parameters: `EconomistData`
+3: ggrepel: 100 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 146 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 146 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0) +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "Corruption and Human Development", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: [Transparency International; UN Human Development Report]") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning message:
+Removed 29 rows containing missing values or values outside the scale range
+(`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0) +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0) +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values outside the scale range
+(`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values outside the scale range
+(`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 11 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 11 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "cyan")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values outside the scale range
+(`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values outside the scale range
+(`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 11 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 11 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "red", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "maroon4", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "blue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "goldenrod3", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "darkblue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange", "SSA" = "purple4", "Americas" = "goldenrod3", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "darkblue", "East EU Cemt Asia" = "indianred4", "MENA" = "darkorange3", "SSA" = "purple4", "Americas" = "goldenrod3", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "green4", size = 4) +
++     scale_color_manual(values = c("Asia Pacific" = "darkblue", "East EU Cemt Asia" = "indianred4", "MENA" = "tomato3", "SSA" = "purple4", "Americas" = "goldenrod3", "EU W. Europe" = "steelblue4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: Removed 29 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+2: Removed 143 rows containing missing values or values
+outside the scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country %in% highlighted_country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, Country != highlighted_country), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), NA)), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white") +
++     scale_fill_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4"), guide = FALSE) +
++     scale_color_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+Warning messages:
+1: The `guide` argument in `scale_*()` cannot be `FALSE`. This was
+deprecated in ggplot2 3.3.4.
+ℹ Please use "none" instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this
+warning was generated. 
+2: Removed 29 rows containing missing values or values outside the
+scale range (`geom_text_repel()`). 
+3: Removed 143 rows containing missing values or values outside the
+scale range (`geom_text_repel()`). 
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white") +
++     scale_fill_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4"), guide = FALSE) +
++     scale_color_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region, fill = Region)) +
++     geom_point(size = 3, shape = 21) +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white") +
++     scale_fill_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4"), guide = FALSE) +
++     scale_color_manual(values = c("darkblue", "indianred4", "goldenrod3", "steelblue4", "tomato3", "purple4"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white") +
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white") +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("blue", "indianred4", "darkorange", "purple4", "red", "cyan"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 2) +  # Increase stroke thickness
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) + 
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("blue", "indianred4", "darkorange", "purple4", "red", "cyan"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) + 
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("blue", "indianred4", "darkorange", "purple4", "red", "cyan"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = sample_countries, aes(label = ifelse(Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_text_repel(data = subset(EconomistData, !(Country %in% sample_countries$Country)), aes(label = ifelse(Country %in% sample_countries$Country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) + 
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("blue", "indianred4", "darkorange", "purple4", "red", "cyan"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) +  # Increase stroke thickness
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("blue", "indianred4", "darkorange", "purple4", "red", "cyan"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) +  # Increase stroke thickness
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "turquoise4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) +  # Increase stroke thickness
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "mediumpurple", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, fill = "white", stroke = 2) +  # Increase stroke thickness
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21, stroke = 2) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, shape = 21) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 2) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     geom_text(data = EconomistData, aes(label = Region), color = "black", size = 3, check_overlap = TRUE, hjust = 0, vjust = 0) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("steelblue4", "indianred4", "darkolivegreen4", "purple4", "tomato3", "goldenrod3"), guide = FALSE) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = "Region")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"))
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 9 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 9 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = "Region")) +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Warning messages:
+1: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend +
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
++ ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
+Error: unexpected symbol in:
+"          legend.position = "top")
+ggplot"
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide =
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
++ n
+Error: unexpected symbol in:
+"          legend.position = "top")
+n"
+> ggplot(EconomistData, aes(x = HDI, y = CPI_Scaled, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) +  # Remove legend title
++     labs(title = "**Corruption and Human Development**", x = "HDI", y = "CPI (Ranking from 1-10)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 7 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) +  # Remove legend title
++     labs(title = "**Corruption and Human Development**", x = "CPI (Ranking from 1-10)", y = "HDI", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 5 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 5 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 2 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 2 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+5: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+6: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+7: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+8: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) +  
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     labs(title = "**Corruption and Human Development**", x = "CPI (Ranking from 1-10)", y = "HDI", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) +  # Remove legend title
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(limits = c(0.1, 1)) +  # Set limits for HDI axis
++     labs(title = "Corruption and Human Development", x = "CPI (Ranking from 1-10)", y = "HDI", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> gplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +  # Increase stroke thickness
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", x = "CPI (Ranking from 1-10)", y = "HDI", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+Error in gplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) : 
+  could not find function "gplot"
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", x = "CPI (Ranking from 1-10)", y = "HDI", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", x = "Corruption Perceptions Index (10=least corrupt)", y = "Human Development Index(1=best", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", x = "Corruption Perceptions Index (10=least corrupt)", y = "Human Development Index(1=best)", color = "Region", caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top")
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = expression(italic("Corruption Perceptions Index (10=least corrupt)")), 
++          y = expression(italic("Human Development Index(1=best)")), 
++          color = "Region", 
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.x = element_text(size = 12),
++           axis.title.y = element_text(size = 12))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = "Region", 
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 12),
++           axis.title.x = element_text(face = "italic", size = 12),
++           plot.caption = element_text(face = "italic", size = 10))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = "Region", 
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3", "Birth County" = "yellowgreen"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = "Region", 
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+3: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+4: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+5: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+6: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+7: ggrepel: 3 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+8: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+9: ggrepel: 4 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+10: ggrepel: 4 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3", "Birth Country" = "yellowgreen"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = "Region", 
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+Warning message:
+ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 4 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 4 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3", "Birth Country" = "yellowgreen"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = NULL,  # Remove color legend title
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        labels = c("Asia Pacific", "East EU Cemt Asia", "MENA", "SSA", "Americas", "EU W. Europe", "Birth Country"),
++                        breaks = c("Asia Pacific", "East EU Cemt Asia", "MENA", "SSA", "Americas", "EU W. Europe", "Birth Country"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = NULL,  # Remove color legend title
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3", "Birth Country" = "yellowgreen"),
++                        labels = c("Asia Pacific", "East EU Cemt Asia", "MENA", "SSA", "Americas", "EU W. Europe", "Birth Country"),
++                        breaks = c("Asia Pacific", "East EU Cemt Asia", "MENA", "SSA", "Americas", "EU W. Europe", "Birth Country"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = NULL,  # Remove color legend title
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9))
+> ggplot(EconomistData, aes(x = CPI_Scaled, y = HDI, color = Region)) +
+Warning messages:
+1: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 1 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
++     geom_point(size = 3, shape = 21, fill = "white", stroke = 1) +
++     geom_text_repel(data = EconomistData, aes(label = ifelse(Country %in% sample_countries$Country | Country == highlighted_country, as.character(Country), "")), size = 3, hjust = 0, vjust = 0, color = "black") +
++     geom_point(data = subset(EconomistData, Country == highlighted_country), color = "yellowgreen", size = 4, stroke = 1) +
++     scale_fill_manual(values = "white", guide = FALSE) +
++     scale_color_manual(values = c("Asia Pacific" = "steelblue4", "East EU Cemt Asia" = "indianred4", "MENA" = "darkolivegreen4", "SSA" = "purple4", "Americas" = "tomato3", "EU W. Europe" = "goldenrod3"),
++                        guide = guide_legend(title = NULL)) + 
++     scale_x_continuous(breaks = seq(1, 10), labels = seq(1, 10)) +
++     scale_y_continuous(breaks = seq(0.1, 1, by = 0.1)) +
++     labs(title = "Corruption and Human Development", 
++          x = "Corruption Perceptions Index (10=least corrupt)", 
++          y = "Human Development Index (1=best)", 
++          color = "Region",
++          caption = "Sources: Transparency International; UN Human Development Report") +
++     theme_minimal(base_size = 16) +
++     theme(plot.title = element_text(face = "bold"),
++           legend.position = "top",
++           axis.title.y = element_text(face = "italic", size = 10),
++           axis.title.x = element_text(face = "italic", size = 10),
++           plot.caption = element_text(face = "italic", size = 9)) +
++     guides(color = guide_legend(override.aes = list(shape = NA), 
++                                 title.position = "top", 
++                                 title.hjust = 0.5,
++                                 label = list("Asia Pacific", "East EU Cemt Asia", "MENA", "SSA", "Americas", "EU W. Europe", "Birth Country"),
++                                 label.hjust = 0.5))

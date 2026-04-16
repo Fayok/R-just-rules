@@ -1,0 +1,468 @@
+---
+title: "MtCars, ZipIncome, and Diamonds Dataset Exploratory Analytics"
+output:
+  pdf_document: default
+  html_document: default
+date: "2024-11-03"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#### Libraries
+
+```{r}
+library(ggplot2)
+library(GGally)
+library(hexbin)
+```
+
+
+## Diamonds Dataset
+
+
+```{r}
+data("diamonds", package = "ggplot2")
+# Filter for Premium and Ideal cuts
+premium_and_ideal <- diamonds[diamonds$cut %in% c("Premium", "Ideal"), ]
+```
+
+##### Price Distribution Histogram
+
+```{r}
+ggplot(premium_and_ideal, aes(x = price, fill = cut)) +
+    geom_histogram(bins = 30, alpha = 0.6, position = "identity") +
+    labs(title = "Price Distribution", x = "Price", y = "Count") +
+    theme_minimal()
+```
+The plot shows a price distribution histogram comparing two  Premium and Ideal cuts. 
+
+**Peak Distribution**
+- The highest frequency occurs at the lower price range, with counts reaching about 6,000 for Ideal cuts
+- The distribution shows a strong right-skewed (positive skew) pattern
+- Most items are concentrated in the 0-5,000 price range
+
+**Price**
+- Ideal cuts (shown in yellow) dominate the lower price ranges
+- Premium cuts (shown in purple) appear less frequently and are more prevalent in mid to higher price ranges
+- The distribution tails off gradually after 5,000, extending to about 20,000
+
+**Pattern Analysis**
+- The distribution follows a typical luxury goods pricing pattern with:
+  - A large mass of lower-priced items
+  - A long tail extending into higher price points
+- There is minimal overlap between Premium and Ideal categories, suggesting distinct pricing strategies for each cut type
+
+
+##### Price Comparison Box Plot
+
+```{r}
+ggplot(premium_and_ideal, aes(x = cut, y = price, fill = cut)) +
+    geom_boxplot() +
+    labs(title = "Price Comparison", x = "Cut", y = "Price") +
+    theme_minimal()
+```
+The box plot shows the price distribution comparison between Premium and Ideal cuts.
+
+
+**Analysis**
+
+- Premium cuts show a higher median price, approximately 3,000
+
+- Ideal cuts display a lower median price, around 2,000
+
+- Premium cuts exhibit a larger interquartile range, spanning roughly from 1,500 to 6,000
+
+- Ideal cuts show an interquartile range, approximately from 1,000 to 4,500
+
+- Both categories display extensive upper whiskers reaching to about 15,000
+
+- The lower whiskers extend close to zero for both cuts
+
+- Multiple outliers appear above the upper whiskers in both categories
+
+- Both categories show asymmetric distributions with longer upper tails
+
+- Premium cuts demonstrate greater price variability
+
+- The boxes indicate that the central 50% of prices are more spread out for Premium cuts compared to Ideal cuts
+
+The box plot illustrates that Premium cuts generally go for higher prices and show more price variation than Ideal cuts, while both categories have significant high-price outliers.
+
+##### Carat vs. Price
+
+```{r}
+ggplot(premium_and_ideal, aes(x = carat, y = price, color = cut)) +
+    geom_point(alpha = 0.6) +
+    labs(title = "Carat vs Price", x = "Carat", y = "Price") +
+    theme_minimal()
+```
+This plot shows the relationship between carat and prices for Premium and Ideal cuts.
+
+**Price-Carat Correlation**
+- A strong positive correlation exists between carat size and price
+
+- The relationship appears non-linear, with prices increasing at higher carat weights
+
+- Most diamonds cluster between 0.5 to 2 carats
+
+**Distribution by Cut**
+- Ideal cuts show higher concentration in the lower to mid-carat range
+
+- Premium cuts appear to be more dispersed across the carat range
+
+- Both cuts show similar price patterns at equivalent carat weights
+
+**Price Range**
+- Prices extend from near zero to approximately 18,000 units
+
+- Higher variability in prices occurs as carat size increases
+
+- Price dispersion becomes more pronounced above 1.5 carats
+
+**Clustering**
+- Data points become increasingly scattered above 2 carats
+- Few and only premium diamonds exist in the 3-4 carat range, 
+
+While both Premium and Ideal cuts follow similar price-carat relationships, there is considerable price variation within each carat size, particularly at higher weights.
+
+
+#### Density Plot of Price for Premium and Ideal Cuts
+
+```{r}
+ggplot(premium_and_ideal, aes(x = price, fill = cut)) +
+    geom_density(alpha = 0.5) +
+    labs(title = "Density Plot of Price for Premium and Ideal Cuts", x = "Price", y = "Density") +
+    scale_fill_manual(values = c("Premium" = "purple", "Ideal" = "orange"))
+```
+The plot provides a detailed visualization of price distributions for Premium and Ideal diamond cuts.
+
+**Distribution** 
+- Ideal cuts (yellow) exhibit the highest density peak at approximately 4e-04
+
+- Premium cuts (purple) show a lower peak density around 2.3e-04
+
+- Both distributions are strongly right-skewed 
+
+- The density decreases rapidly after the peak, particularly for Ideal cuts
+
+**Price Distribution**
+
+- Most density is concentrated in the lower price range 
+
+- Premium cuts show a slight secondary peak around 5,000
+
+- The overlap between Premium and Ideal cuts is most pronounced in the mid-price range
+
+The density plot shows that Ideal cuts are more concentrated in lower price ranges, while Premium cuts show a more spread-out distribution across price points.
+
+##### Violin Plot
+
+```{r}
+ggplot(premium_and_ideal, aes(x = cut, y = carat, fill = cut)) +
+    geom_violin(alpha = 0.6) +
+    labs(title = "Violin Plot of Carat for Premium and Ideal Cuts", x = "Cut", y = "Carat") +
+    scale_fill_manual(values = c("Premium" = "purple", "Ideal" = "yellow"))
+```
+The violin plot visualizes carat distribution for Premium and Ideal diamond cuts.
+
+- The plot spans from approximately 0.3 to 4 carats
+
+- The widest section occurs around 1 carat for both cuts
+
+- Premium cuts show slightly more spread in the middle range
+
+- Ideal cuts display a more concentrated distribution
+
+- Both cuts exhibit multiple bulges, indicating common carat weights
+
+- Major density clusters appear at approximately 0.5, 1.0, and 1.5 carats
+
+- The distribution thins considerably above 2 carats
+
+- Both cuts share similar overall shapes but with subtle differences in density
+
+- Premium cuts show slightly more variance in the middle carat ranges
+
+- Both cuts demonstrate similar maximum ranges, extending to about 4 carats
+
+The violin plot shows that while both Premium and Ideal cuts follow similar carat distributions, Premium cuts tend to have slightly more variation in the middle ranges.
+
+
+## mtcars Dataset
+
+```{r}
+data("mtcars")
+```
+
+#### MPG by Number of Cylinders
+
+```{r}
+ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+    geom_boxplot() +
+    labs(title = "MPG by Number of Cylinders", x = "Number of Cylinders", y = "Miles per Gallon") +
+    scale_fill_discrete(name = "Cylinders")
+```
+This boxplot shows the relationship between the number of cylinders in vehicles and their fuel efficiency measured in Miles per Gallon.
+
+####Fuel Efficiency
+
+**4-Cylinder Vehicles**
+- Highest median MPG at approximately 26 MPG
+
+- Widest range of MPG values, spanning from about 22 to 33 MPG
+
+- Shows the best fuel efficiency among all cylinder configurations
+
+**6-Cylinder Vehicles**
+- Median MPG around 19-20 MPG
+
+- More compact distribution than 4-cylinder vehicles
+
+- Range spans approximately from 17 to 22 MPG
+
+**8-Cylinder Vehicles**
+- Lowest median MPG at about 15 MPG
+
+- Contains two outliers at the bottom of around 10-11 MPG
+
+- Range typically spans from 14 to 17 MPG
+
+####Observations
+
+There is a clear inverse relationship between the number of cylinders and fuel efficiency. As the number of cylinders increases, the MPG decreases. The plot suggests that 4-cylinder engines are significantly more fuel-efficient than their 6- and 8-cylinder counterparts.
+
+The variation in fuel efficiency is most pronounced in 4-cylinder vehicles, suggesting greater variety in vehicle types within this category. In contrast, 8-cylinder vehicles show more consistent fuel consumption patterns, except for the two low-performing outliers.
+
+##### Average MPG by Cylinders
+
+```{r}
+mtcars_grouped <- aggregate(mpg ~ cyl, data = mtcars, mean)
+ggplot(mtcars_grouped, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+    geom_bar(stat = "identity") +
+    labs(title = "Average MPG by Cylinders", x = "Number of Cylinders", y = "Average MPG") +
+    scale_fill_discrete(name = "Cylinders")
+```
+
+This bar chart represents the average Miles Per Gallon across different cylinder configurations in vehicles. 
+
+##### Fuel Economy 
+
+**4-Cylinder Engines**
+- Highest average fuel efficiency at approximately 26 MPG
+
+- Significantly more fuel-efficient than both 6- and 8-cylinder options
+
+- Shows nearly double the efficiency of 8-cylinder engines
+
+**6-Cylinder Engines**
+- Moderate fuel efficiency at around 19-20 MPG
+
+- Represents a middle ground between 4- and 8-cylinder configurations
+
+- Approximately 25% less efficient than 4-cylinder engines
+
+**8-Cylinder Engines**
+- Lowest fuel efficiency at roughly 15 MPG
+
+- Shows the poorest fuel economy of all three configurations
+
+- Approximately 40% less efficient than 4-cylinder engines
+
+##### Observations
+
+The bar chart reveals an inverse relationship between cylinder count and fuel efficiency. As the number of cylinders increases, there is a consistent and significant decrease in average MPG. The decline appears to be steeper between 4 and 6 cylinders compared to the drop between 6 and 8 cylinders, suggesting a non-linear relationship between cylinder count and fuel consumption.
+
+##### Density Plot
+
+```{r}
+ggplot(mtcars, aes(x = mpg, fill = factor(cyl))) +
+    geom_density(alpha = 0.5) +
+    labs(title = "Density Plot of MPG by Cylinders", x = "MPG", y = "Density") +
+    scale_fill_discrete(name = "Cylinders")
+```
+
+##### Distribution 
+
+**8-Cylinder Vehicles**
+- Shows a sharp, narrow peak centered around 15 MPG
+
+- Has the highest density of all configurations
+
+- Displays a small secondary peak around 10 MPG
+
+- Relatively narrow spread, indicating consistent fuel economy performance
+
+**6-Cylinder Vehicles**
+- Peak density occurs around 19-20 MPG
+
+- Shows a slightly broader distribution than 8-cylinder vehicles
+
+- Maximum density reaches about 0.22
+
+**4-Cylinder Vehicles**
+- Exhibits the widest spread, ranging from about 22 to 35 MPG
+
+- Shows multiple smaller peaks, indicating diverse fuel efficiency clusters
+
+- Lower maximum density (approximately 0.08) compared to 6 and 8 cylinders
+
+- Most right-skewed distribution among all configurations
+
+##### Observations
+
+The density plot demonstrates distinct separation between the three cylinder configurations, with minimal overlap between groups. The progressively wider and flatter distribution as cylinder count decreases suggests greater variation in fuel efficiency among 4-cylinder vehicles, while 8-cylinder vehicles show more standardized fuel consumption patterns.The 4-cylinder distribution indicates potential subgroups of vehicles with different fuel efficiency characteristics.
+
+##### Dot Plot
+
+```{r}
+ggplot(mtcars, aes(x = factor(cyl), y = mpg, color = factor(cyl))) +
+    geom_jitter(width = 0.2, size = 2) +
+    labs(title = "Dot Plot of MPG by Cylinders", x = "Number of Cylinders", y = "MPG") +
+    scale_color_discrete(name = "Cylinders")
+```
+The dot plot represents the distribution of fuel efficiency across different cylinder configurations.
+
+##### Distribution
+
+**4-Cylinder Vehicles**
+
+- Shows the highest MPG values, ranging from about 22 to 33 MPG
+
+- Points are widely scattered, indicating high variability in fuel efficiency
+
+- Several vehicles achieve over 30 MPG, with the highest reaching approximately 33 MPG
+
+- Most concentrated cluster appears between 22-25 MPG
+
+**6-Cylinder Vehicles**
+- MPG values cluster tightly between 17-22 MPG
+
+- Shows less variation compared to 4-cylinder vehicles
+
+- Forms a relatively compact group of points
+
+- Highest 6-cylinder achieves about 22 MPG
+
+**8-Cylinder Vehicles**
+- Lowest MPG values, primarily clustered between 13-19 MPG
+
+- Shows one notable outlier at approximately 10-11 MPG
+
+- Most points concentrated around 15 MPG
+
+- Demonstrates the least spread in values among normal performance vehicles
+
+##### Observations
+
+The dot plot shows the negative correlation between cylinder count and fuel efficiency. The distinct vertical grouping of points for each cylinder count shows clear separation between the efficiency ranges of different engine configurations, with minimal overlap between groups. The spread of points also suggests that 4-cylinder engines have the most diverse use cases, while 8-cylinder engines tend to be more consistent in their fuel consumption patterns.
+
+
+
+## Zip Income Dataset
+
+
+```{r}
+zipincome <- read.csv("/Users/admin/Downloads/zipincome.csv")
+str(zipincome)
+summary(zipincome)
+```
+
+##### Boxplot of MeanHouseIncome by Zipcode
+
+```{r}
+ggplot(zipincome, aes(x = factor(Zip1), y = MeanHouseholdIncome)) +
+    geom_boxplot(fill = "lightblue", color = "darkblue") +
+    labs(title = "Boxplot of MeanHouseholdIncome by Zipcode", x = "Zipcode", y = "MeanHouseholdIncome") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+This boxplot shows the distribution of mean household income across different ZIP codes.
+
+The median household income across all ZIP codes generally falls between $40,000 and $60,000, with most ZIP codes showing similar central tendencies. ZIP code 0 and 9 appear to have slightly higher median values than the others.
+
+**Outliers and Variation**
+
+- Significant outliers are present in all ZIP codes, with some household incomes reaching up to $250,000
+
+- The most extreme outliers appear in ZIP codes 1 and 3, reaching approximately $250,000
+
+- All ZIP codes show numerous high-income outliers, represented by dots above the whiskers
+
+- The interquartile ranges are relatively compact, suggesting consistent income distributions within the middle 50% of households
+
+- The whiskers extend from approximately $20,000 to $100,000 in most cases
+
+- ZIP code 0 shows a slightly larger box, indicating more variability in the middle 50% of incomes
+
+**Skewness**
+The data shows strong positive skewness across all ZIP codes
+
+The box plot shows that while most households across ZIP codes have similar income distributions, there is a considerable number of high-income households, thus substantial right-skewed distributions in all areas.
+
+##### Scatter Plot of Relationship between MeanHouseIncome and Mean Education
+```{r}
+ggplot(zipincome, aes(x = MeanEducation, y = MeanHouseholdIncome)) +
+    geom_point() +
+    labs(
+        x = "Mean Education (years)",
+        y = "Mean Household Income",
+        title = "Relationship between Mean Household Income and Mean Education"
+    ) +
+    theme_minimal()
+```
+The scatter plot illustrates the relationship between mean education (years) and mean household income.
+
+A strong positive correlation exists between education level and household income. As years of education increase, there is a clear upward trend in mean household income, particularly noticeable from 10 to 17 years of education.
+
+**Distribution** 
+
+- The data points are densely clustered between 10-17 years of education
+
+- Income values show greater dispersion as education levels increase
+
+- Most observations fall within the range of $20,000 to $150,000 annual household income
+
+
+**Outliers**
+
+- Several high-income outliers appear across all education levels
+
+- A few isolated points appear at very low education levels (near 0 years)
+
+- Some extreme outliers reach $250,000 in income, particularly at higher education levels
+
+The visualization strongly suggests that higher educational attainment is associated with increased household income, though with considerable variation in outcomes, especially at higher education levels.
+
+
+#### Hexbin Plot of Relationship between MeanHouseIncome and Mean Education
+```{r}
+ggplot(zipincome, aes(x = MeanEducation, y = MeanHouseholdIncome)) +
+    geom_hex() +
+    labs(
+        x = "Mean Education (years)",
+        y = "Mean Household Income",
+        title = "Hexbin Plot: Mean Household Income vs Mean Education"
+    ) +
+    scale_fill_continuous(name = "Count") +
+    theme_minimal()
+```
+
+The hexbin plot reveals the density distribution of the relationship between mean education and mean household income.
+
+The plot shows the highest concentration of data points around 12-15 years of education and $30,000-$60,000 income range. This represents the most common combination of education and income levels in the dataset.
+
+
+- An upward-trending pattern shows a clear positive correlation exists between education and income. 
+
+- The relationship becomes more diffused at higher education levels, showing greater income variability
+
+- Data points are sparse below 8 years of education
+
+
+- A clear floor effect exists with very few households below $20,000
+
+
+The hexbin plot shows that while higher education generally correlates with higher income, there is considerable variation in outcomes, particularly at higher education levels.
+
+

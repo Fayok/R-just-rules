@@ -1,0 +1,496 @@
+title: "NASA GISS Assignment"
+output: html_document
+date: "2024-02-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+library(ggplot2)
+libraru(tidyr)
+library(tidyr)
+data <- read_csv("NASA-GISTEMP-DataCSV.csv")
+library(ggplot2)
+library(tidyr)
+data <- read.csv("NASA-GISTEMP-DataCSV.csv")
+data_long <- tidyr::pivot_longer(data, cols = -Year, names_to = "Region", values_to = "Temperature_Anomaly")
+str(data)
+surface temperature analysis <- read.csv("NASA_GISTEMP-DataCSV.csv")
+surface temperature analysis <- read.csv("NASA-GISTEMP-DataCSV.csv")
+surface_temperature_analysis <- read.csv("NASA-GISTEMP-DataCSV.csv")
+hist(surface_temperature_analysis$Jan)
+par(mar = c(3, 3, 2, 1))
+hist(surface_temperature_analysis$Jan)
+library(ggplot2)
+ggplot(surface_temperature_analysis, aes(x = year)) + geom_histogram()
+ggplot(surface_temperature_analysis, aes(x = Year)) + geom_histogram()
+ggplot(surface_temperature_analysis, aes(x = Year, y =Jan)) + geom_histogram()
+ggplot(surface_temperature_analysis, aes(x = Jan)) + geom_histogram()
+temperature <- pivot_longer(temperature_data, cols = -Year, names_to = "Month", values_to = "Temperature")
+library(tidyr)
+temperature <- pivot_longer(temperature_data, cols = -Year, names_to = "Month", values_to = "Temperature")
+temperature <- pivot_longer(surface_temperature_analysis, cols = -Year, names_to = "Month", values_to = "Temperature")
+rlang::last_trace()
+surface_temperature_analysis <- mutate_all(surface_temperature_analysis, as.character)
+library(dplyr)
+surface_temperature_analysis <- mutate_all(surface_temperature_analysis, as.character)
+temperature <- pivot_longer(surface_temperature_analysis,
+cols = -Year,
+names_to = "Month",
+values_to = "Temperature")
+ggplot(temperature, aes(x = Month, y = Temperature, group = Year, color = Year)) +
+geom_line() +
+labs(x = "Month", y = "Temperature", title = "Surface Temperature Analysis") +
+theme_minimal()
+ggplot(january_data, aes(x = Year, y = Temperature, color = factor(Year))) +
+geom_point() +
+geom_line() +
+labs(x = "Year", y = "Temperature", title = "January Temperatures")
+ggplot(subset(temperature, Month == "Jan"), aes(x = Year, y = Temperature, color = factor(Year))) +
+geom_point() +
+geom_line() +
+labs(x = "Year", y = "Temperature", title = "January Temperatures")
+no
+temperature <- temperature %>%
+mutate(Decade = 10 * (Year %/% 10))
+library(ggplot2)
+data_format <- reshape2::melt(temperature_data, id.vars = "Year", variable.name = "Month", value.name = "Temperature")
+install.packages("reshape2")
+install.packages("gridExtra")
+library(reshape2)
+library(ggplot2)
+data_format <- reshape2::melt(temperature_data, id.vars = "Year", variable.name = "Month", value.name = "Temperature")
+surface_temperatures <- read.csv("NASA-GISTEMP-DataCSV.csv")
+library(reshape2)
+library(ggplot2)
+library(gridExtra)
+format_data <- melt(surface_temperatures, id.vars = "Year")
+line_plot <- ggplot(format_data, aes(x = Year, y = value, color = variable)) +
+geom_line() +
+labs(title = "Temperature Variations Over 135 Years",
+x = "Year",
+y = "Temperature (°C)",
+color = "Month") +
+theme_minimal()
+boxplot <- ggplot(format_data, aes(x = variable, y = value, fill = variable)) +
+geom_boxplot() +
+labs(title = "Temperature Distribution by Month",
+x = "Month",
+y = "Temperature (°C)",
+fill = "Month") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+View(line_plot)
+View(line_plot)
+View(surface_temperatures)
+print(boxplot)
+boxplot <- ggplot(melted_data, aes(x = variable, y = value, fill = variable)) +
+geom_boxplot(color = "black", fill = "lightblue", alpha = 0.7) +  # Customize box and fill colors
+labs(title = "Temperature Distribution for Each Month",
+x = "Month",
+y = "Temperature (°C)",
+fill = "Month") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1),
+panel.grid.major = element_blank(),  # Remove major gridlines
+panel.grid.minor = element_blank())
+boxplot <- ggplot(format_data, aes(x = variable, y = value, fill = variable)) +
+geom_boxplot(color = "black", fill = "lightblue", alpha = 0.7) +  # Customize box and fill colors
+labs(title = "Temperature Distribution for Each Month",
+x = "Month",
+y = "Temperature (°C)",
+fill = "Month") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1),
+panel.grid.major = element_blank(),  # Remove major gridlines
+panel.grid.minor = element_blank())
+print(boxplot)
+View(surface_temperatures)
+View(line_plot)
+View(format_data)
+library(ggplot2)
+surfaceTemp <- read.csv("NASA-GISTEMP-DataCSV.csv")
+format_data <- reshape2::melt(data, id.vars = "Year", variable.name = "Month", value.name = "Temperature")
+data_long$Month <- factor(data_long$Month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+data_long$Month <- factor(format_data$Month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+format_data$Month <- factor(format_data$Month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+subset_data <- split(format_data, cut(format_data$Year, breaks = seq(min(format_data$Year), max(format_data$Year) + 17, by = 17), include.lowest = TRUE))
+library(ggplot2)
+library(readr)
+View(surface_temperatures)
+View(surface_temperatures)
+View(surface_temperatures)
+View(line_plot)
+surface_temperatures <- read_csv("NASA-GISTEMP-Data2CSV.csv")
+str(surface_temperatures)
+data_long <- tidyr::pivot_longer(surface_temperatures, cols = -Year, names_to = "Region", values_to = "Temperature")
+data_long$Year <- as.factor(data_long$Year)
+ggplot(data_long, aes(x = Year, y = Temperature, color = Region)) +
+geom_line() +
+labs(title = "Temperature Trends Over the Years",
+x = "Year",
+y = "Temperature (Anomalies)",
+color = "Region") +
+theme_minimal()
+NASA_Yr = surface_temperatures[.1]
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab ="Temp. Anom. C", xlab = "Year, main = "Surface Temperature Anom. relative t0o 1951-1980 Ave.")
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab = "Temp. Anom. C", xlab = "Year", main = "Surface Temperature Anom. relative to 1951-1980 Ave.")
+# Plotting Year against NHem temperature anomalies
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab = "Temp. Anom. C", xlab = "Year", main = "Surface Temperature Anom. relative to 1951-1980 Ave.")
+# Plotting Year against NHem temperature anomalies
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab = "Temp. Anom. C", xlab = "Year", main = "Surface Temperature Anom. relative to 1951-1980 Ave.")
+
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab = "Temp. Anom. C", xlab = "Year", main = "Surface Temperature Anom. relative to 1951-1980 Ave.")
+
+plot(NASA_Yr, surface_temperatures[,2], type = "l", ylim = c(-3,3), ylab = "Temp. Anom. C", xlab = "Year", main = "Surface Temperature Anom. relative to 1951-1980 Ave.")
+View(surface_temperatures)
+View(surface_temperatures)
+View(surface_temperatures)
+View(format_data)
+View(boxplot)
+View(boxplot)
+library(tidyverse)
+library(ggplot2)
+surface_temperatures <- read.csv("NASA-GISTEMP-DataCSV.csv, skip=1, na = "***")
+surface_temperatures <- read.csv("NASA-GISTEMP-DataCSV.csv, skip=1, na.strings = "***")
+surface_temperatures <- read.csv("NASA-GISTEMP-DataCSV.csv, skip=1, na = "***")
+surface_temperatures <- read.csv("NASA-GISTEMP-DataCSV.csv, skip = 1, na = "***")
+surface_temperatures <- read_csv("NASA-GISTEMP-DataCSV.csv, skip=1, na = "***")
+surface_temperatures <- read_csv("NASA-GISTEMP-DataCSV.csv", skip=1, na = "***")
+select(year = Year, temperature_differences ' "J-D")
+ggplot(aes(x=year, y=temperature_differences))
+geom_line()
+select(year = Year, temperature_differences = "J-D")
+surface_temperatures <- read_csv("NASA-GISTEMP-DataCSV.csv", skip=1, na = "***")
+select(year = Year, temperature_differences = "J-D")
+select(year = Year, temperature_differences = "J-D")
+select(year = "Year", temperature_differences = "J-D")
+select(year = "Year", temperature_differences = "J-D")
+surface_temp < read.csv("NASA-GISTEMP-DataCSV.csv, skip=1, na = "***")
+surface_temp < read.csv("NASA-GISTEMP-DataCSV.csv", skip=1, na = "***")
+surface_temp <- read.csv("NASA-GISTEMP-DataCSV.csv", skip=1, na = "***")
+select(year = Year, temperature difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+load(tidyverse)
+library(tidyverse)
+select(year = Year, temperature_difference = 'J-D')
+select(year = "Year", temperature_difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+select(year = 'Year', temperature_difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+View(surface_temp)
+surface_temp <- read.csv("NASA-GISTEMP-DataCSV.csv")
+select(year = Year, temperature_difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+select(year = Year, temperature_difference = 'J-D')
+View(surface_temp)
+library(ggplot2)
+ggplot(surface_temp, aes(x = Year, y = J-D )) + geom_histogram()
+ggplot(surface_temp, aes(x = Year, y = 'J-D' )) + geom_histogram()
+ggplot(surface_temp, aes(x = Year, y = 'J-D' )) + geom_line()
+library(ggplot20)
+library(ggplot2)
+library(dplyr)
+surface_temperatures <- na.omit(surface.temp)
+surface_temperatures <- na.omit(surface_temp)
+surface_temperatures[surface_temperatures == "****"] <- NA
+surface_temperatures$J.D <-as.numeric(surface_temperatures$J-D)
+surface_temperatures$J.D <-as.numeric(surface_temperatures$J.D)
+ggplot(surface_temperatures, aes(x = Year, y = J.D)) +
+geom_line() +
+labs(title = "Annual Mean Temperature Anomaly",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme_minimal()
+ggplot(surface_temperatures, aes(y = J.D)) +
+geom_boxplot() +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly",
+y = "Temperature Anomaly (°C)")
+ggplot(surface_temperatures, aes(x = factor(Year), y = J_D)) +
+geom_boxplot() +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() + scale_fill_manual(values = rainbow(length(unique(data_clean$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() + scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_tufteboxplot() + scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+library(ggthemes)
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_tufteboxplot() + scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_tufteboxplot() + scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() +
+scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme_tufte() +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+subset_data <- subset(surface_temperatures, Year %% 10 == 0)
+ggplot(subset_data, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() +
+scale_fill_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme_tufte() +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year)
+ggplot(surface_temperatures, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() +
+scale_fill_manual(values = rainbow(length(unique(surface_temperatures$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+subset_data <- subset(surface_temperatures, Year %% 10 == 0)
+ggplot(subset_data, aes(x = factor(Year), y = J.D)) +
+geom_boxplot() +
+scale_fill_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year)
+ggplot(subset_data, aes(x = factor(Year), y = J.D)) +
+geom_boxplot(width = 0.7, outlier.shape = NA) +  # Adjust width here
+scale_fill_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year)
+ggplot(subset_data, aes(x = factor(Year), y = J.D, fill = factor(Year))) +
+geom_boxplot(position = position_dodge(width = 0.8)) +  # Adjust dodge width here
+scale_fill_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year)
+ggplot(subset_data, aes(x = factor(Year), y = J.D, fill = factor(Year))) +
+geom_boxplot(position = position_dodge(width = 0.8)) +  # Adjust dodge width here
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year) +  # Specify the breaks for every 10 years
+scale_fill_manual(values = rainbow(length(unique(subset_data$Year))))
+gplot(subset_data, aes(x = factor(Year), y = J.D, fill = factor(Year))) +
+geom_boxplot(position = position_dodge(width = 0.8)) +  # Adjust dodge width here
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year) +  # Specify the breaks for every 10 years
+scale_fill_brewer(palette = "Set3")
+library(ggplot2)
+gplot(subset_data, aes(x = factor(Year), y = J.D, fill = factor(Year))) +
+geom_boxplot(position = position_dodge(width = 0.8)) +  # Adjust dodge width here
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year) +  # Specify the breaks for every 10 years
+scale_fill_brewer(palette = "Set3")
+library(ggplot)
+install.packages(ggplot)
+library(ggplot)
+gplot(subset_data, aes(x = factor(Year), y = J.D, fill = factor(Year))) +
+geom_boxplot(position = position_dodge(width = 0.8)) +  # Adjust dodge width here
+labs(title = "Box Plot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+scale_x_discrete(breaks = subset_data$Year) +  # Specify the breaks for every 10 years
+scale_fill_brewer(palette = "Set3")
+ggplot(surface_temperatures, aes(x = Year, y = J.D)) +
+geom_point() +
+labs(title = "Scatterplot of Annual Mean Temperature Anomaly by Year",
+x = "Year",
+y = "Temperature Anomaly (°C)")
+ggplot(surface_temperatures, aes(x = Year, y = Jan, Feb)) +
+geom_line() +
+labs(title = "Annual Mean Temperature Anomaly",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme_minimal()
+ggplot(subset_data, aes(x = Month, y = Temperature, group = Year, color = factor(Year))) +
+geom_line() +
+scale_color_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Temperature Variation from January to December (Every 10 Years)",
+x = "Month",
+y = "Temperature (°C)",
+color = "Year")
+ggplot(surface_temperatures, aes(x = Year, y = Jan, Feb)) +
+geom_line() +
+labs(title = "Annual Mean Temperature Anomaly",
+x = "Year",
+y = "Temperature Anomaly (°C)") +
+theme_minimal()
+ggplot(subset_data, aes(x = Month, y = Temperature, group = Year, color = factor(Year))) +
+geom_line() +
+scale_color_manual(values = rainbow(length(unique(subset_data$Year)))) +
+labs(title = "Temperature Variation from January to December (Every 10 Years)",
+x = "Month",
+y = "Temperature (°C)",
+color = "Year")
+monthly_data <- data.frame(
+Year = rep(subset_data$Year, each = 12),
+Month = rep(1:12, times = nrow(subset_data)),
+Temperature = c(subset_data$Jan, subset_data$Feb, subset_data$Mar,
+subset_data$Apr, subset_data$May, subset_data$Jun,
+subset_data$Jul, subset_data$Aug, subset_data$Sep,
+subset_data$Oct, subset_data$Nov, subset_data$Dec)
+)
+library(ggplot2)
+ggplot(monthly_data, aes(x = Year, y = Temperature)) +
+geom_point() +
+facet_wrap(~ Month, scales = "free", ncol = 4) +
+labs(title = "Temperature Anomalies by Month for Every 10 Years",
+x = "Year",
+y = "Temperature Anomaly (°C)",
+col = "Month")
+ggplot(plot_data, aes(x = Month, y = Temperature, group = Year, color = as.factor(Year))) +
+geom_point() +
+scale_x_discrete(name = "Month", labels = month.abb) +  # Setting x-axis labels to month abbreviations
+labs(title = "Monthly Temperature Variations (1880-2015)",
+y = "Temperature (°C)",
+color = "Year") +
+theme_minimal() +
+theme(legend.position = "bottom")
+plot_data <- data.frame(Year = rep(df$Year, 12),
+Month = rep(month.abb, nrow(df)),
+Temperature = as.vector(as.matrix(df[, -1])))
+monthly_data <- data.frame(
+Year = rep(subset_data$Year, each = 12),
+Month = rep(1:12, times = nrow(subset_data)),
+Temperature = c(subset_data$Jan == "Jan", subset_data$Feb, subset_data$Mar,
+subset_data$Apr, subset_data$May, subset_data$Jun,
+subset_data$Jul, subset_data$Aug, subset_data$Sep,
+subset_data$Oct, subset_data$Nov, subset_data$Dec)
+)
+ggplot(plot_data, aes(x = Month, y = Temperature, group = Year, color = as.factor(Year))) +
+geom_point() +
+scale_x_discrete(name = "Month", labels = month.abb) +  # Setting x-axis labels to month abbreviations
+labs(title = "Monthly Temperature Variations (1880-2015)",
+y = "Temperature (°C)",
+color = "Year") +
+theme_minimal() +
+theme(legend.position = "bottom")
+subset_data <- surface_temperatures[surface_temperatures$Year %% 10 == 0, ]
+library(ggplot2)
+library(tidyr)
+ubset_data_long <- pivot_longer(subset_data, cols = -c(Year),
+names_to = "Month", values_to = "Temperature")
+str()
+str(Jan)
+df$Jul <- as.numeric(ifelse(df$Jul == "****", NA, df$Jul))
+class(df)
+> monthly_data <- data.frame(
+> monthly_data <- data.frame(
+> monthly_data <- data.frame(
+> monthly_data <- data.frame(
+monthly_data <- data.frame(
++     Year = rep(subset_data$Year, each = 12),
+monthly_data <- data.frame(
++     Year = rep(subset_data$Year, each = 12),
+View(surface_temp)
+scatterplots <- function(data, start_year, end_year) {
+for (month in 1:12) {month_data <- data[, c(1, month + 1)]  year_range_data <- month_data[data$Year >= start_year & data$Year <= end_year, ]   p <- ggplot(year_range_data, aes_string(x = "Year", y = colnames(month_data)[2])) +
+scatterplots <- function(data, start_year, end_year) {
+for (month in 1:12) {
+month_data <- data[, c(1, month + 1)]
+year_range_data <- month_data[data$Year >= start_year & data$Year <= end_year, ]
+p <- ggplot(year_range_data, aes_string(x = "Year", y = colnames(month_data)[2])) +
+geom_point() +
+ggtitle(paste("Scatterplot for", month.name[month], "from", start_year, "to", end_year)) +
+xlab("Year") + ylab("Temperature")
+print(p)
+}
+}
+time_ranges <- seq(1880, 2015, by = 15)
+for (i in 1:(length(time_ranges) - 1)) {
+create_scatterplots(data, time_ranges[i], time_ranges[i + 1])
+}
+for (i in 1:(length(time_ranges) - 1)) {
+scatterplots(data, time_ranges[i], time_ranges[i + 1])
+}
+scatterplots <- function(input_data, start_year, end_year) {
+for (month in 1:12) {
+month_data <- input_data[, c(1, month + 1)]
+year_range_data <- month_data[input_data$Year >= start_year & input_data$Year <= end_year, ]
+p <- ggplot(year_range_data, aes_string(x = "Year", y = colnames(month_data)[2])) +
+geom_point() +
+ggtitle(paste("Scatterplot for", month.name[month], "from", start_year, "to", end_year)) +
+xlab("Year") + ylab("Temperature")
+print(p)
+}
+}
+for (i in 1:(length(time_ranges) - 1)) {
+scatterplots(my_data_frame, time_ranges[i], time_ranges[i + 1])
+}
+df_long <- pivot_longer(df, cols = -Year, names_to = "Month", values_to = "Temperature")
+df_long <- pivot_longer(df, cols = -Year, names_to = "Month", values_to = "Temperature")
+library(tidyr)
+df_long <- pivot_longer(df, cols = -Year, names_to = "Month", values_to = "Temperature")
+library(reshape2)
+df_long <- melt(df, id.vars = "Year", variable.name = "Month", value.name = "Temperature")
+ggplot(df_long, aes(x = Month, y = Temperature)) +
+geom_point() +
+facet_wrap(~Month, scales = "free") +
+labs(title = "Temperature Variation by Month", x = "Month", y = "Temperature") +
+theme_minimal()
+library(reshape2)
+library(ggplot2)
+df_long <- melt(df, id.vars = "Year", variable.name = "Month", value.name = "Temperature")
+ggplot(df_long, aes(x = Year, y = Temperature)) +
+geom_point() +
+facet_wrap(~Month, scales = "free") +
+labs(title = "Temperature Variation by Month", x = "Year", y = "Temperature") +
+theme_minimal()
+rlang::last_trace()
+str(df_long)
+pairs(data[,2:13], main="Scatterplot Matrix")
+library(ggplot2)
+ggplot(data, aes(x=Year)) +
+geom_line(aes(y=rowMeans(data[,2:13], na.rm=TRUE)), colour="blue") +
+labs(title="Line Plot - Mean temperature over time", x="Year", y="Mean Temperature")
+ggplot(surface_temperatures, aes(x=Year)) +
+geom_line(aes(y=rowMeans(data[,2:13], na.rm=TRUE)), colour="blue") +
+labs(title="Line Plot - Mean temperature over time", x="Year", y="Mean Temperature")

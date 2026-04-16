@@ -1,0 +1,117 @@
+---
+title: "K-means Clustering Analysis of Student Grades in Math, English, and Science"
+author: "Fayokemi Olawode"
+date: "2024-12-01"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(readr)
+```
+
+## Loading and Preparing Data
+
+```{r}
+grades <- read.csv("/Users/admin/Downloads/grades.csv")
+grades_data <- grades[,-1]
+```
+
+## Calculate WSS for k = 1 to 15
+
+```{r}
+calculate_wss <- function(data, k) {
+  km <- kmeans(data, centers = k, nstart = 25)
+  return(km$tot.withinss)
+}
+
+wss <- sapply(1:15, function(k) calculate_wss(grades_data, k))
+```
+
+## Elbow Curve for Optimal k
+
+```{r}
+plot(1:15, wss, type = "b",
+     xlab = "Number of Clusters (k)",
+     ylab = "Within-cluster Sum of Squares (WSS)",
+     main = "Elbow Method for Optimal k")
+```
+This elbow plot shows that the curve starts with a steep decline and then levels off. The WSS value begins at approximately 25,000 for k=1 and drops dramatically until around k=3.The elbow occurs around k=3, thus indicating the optimal number of clusters for this dataset.
+
+## K-means Clustering
+
+```{r}
+optimal_k <- 3
+km_result <- kmeans(grades_data, centers = optimal_k, nstart = 25)
+grades$Cluster <- as.factor(km_result$cluster)
+```
+
+## Scatter Plot Function
+
+```{r}
+plot_scatter <- function(data, x, y) {
+  ggplot(data, aes(x = .data[[x]], y = .data[[y]], color = Cluster)) +
+    geom_point() +
+    labs(x = x, y = y, title = paste(x, "vs", y)) +
+    theme_minimal()
+}
+```
+
+## Generating Plots
+
+```{r}
+
+p1 <- plot_scatter(grades, "English", "Math")
+p2 <- plot_scatter(grades, "English", "Science")
+p3 <- plot_scatter(grades, "Math", "Science")
+```
+
+
+
+### English vs Math
+
+```{r, echo=FALSE}
+print(p1)
+```
+**Red Cluster:**
+This group shows scores ranging from English: 60-80 points for English, and 55-75 points for Math.This cluster represents students who scored the lowest in both subjects.
+
+**Green Cluster:**
+This cluster shows students with scores ranging from 90-100 points for both English and Math.
+This cluster represents the highest scoring students, showing strong performance in both subjects.
+
+**Blue Cluster:**
+This cluster shows students with scores ranging from 75-95 points for English and 75-90 points for Math. It represents the average to above-average performing students.
+
+### English vs Science
+
+```{r, echo=FALSE}
+print(p2)
+```
+**Red Cluster:**
+Shows the widest spread of scores with students scoring between 60-70 in English and 60-75 in Science. This cluster shows generally lower performance in both subjects. 
+
+**Blue Cluster:**
+This cluster shows moderate variability
+with scores being around 75-85 in both English and Science. The cluster demonstrates average to above average performance in both subjects. 
+
+**Green Cluster:**
+This cluster shows scores of around 90-100 in both subjects and represents exceptional performance in both English and Science.
+
+### Math vs Science
+
+```{r, echo=FALSE}
+print(p3)
+```
+
+**Red Cluster:**
+This shows Math scores ranging approximately from **55-70**, and Science scores ranging approximately from **55-80**. The cluster represents students with lower performance in both Math and Science.
+
+**Green Cluster:**
+This cluster shows Math scores ranging approximately from 85-100, and Science scores ranging approximately from 85-100. The cluster represents high-performing students excelling in both Math and Science.
+
+**Blue Cluster:**
+This cluster shows Math scores ranging approximately from 75-85 and Science scores ranging approximately from 75-90.It represents students with average performance in both subjects
